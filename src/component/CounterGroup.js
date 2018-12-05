@@ -41,6 +41,11 @@ class CounterGroup extends Component {
   };
 
   increaseNumber = (changedNum, id) => {
+    this.props.dispatch({
+      type: "INCREASE_NUM",
+      payload: {changedNum, id}
+    });
+/*
     const changedArr = this.state.counterArr.map(counterItem => {
       if (counterItem.id === id) {
         return { id: id, count: counterItem.count + changedNum };
@@ -48,8 +53,8 @@ class CounterGroup extends Component {
         return counterItem;
       }
     });
-
-    this.setState({ counterArr: [...changedArr] });
+*/
+    //this.setState({ counterArr: [...changedArr] });
   };
 
   decreaseNumber = (changedNum, id) => {
@@ -67,7 +72,7 @@ class CounterGroup extends Component {
   render() {
     return (
       <div>
-        {this.state.counterArr.map(counterItem => (
+        {this.props.counterItems.map(counterItem => (
           <Counter
             key={counterItem.id}
             id={counterItem.id}
