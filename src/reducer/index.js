@@ -9,9 +9,20 @@ export default (state = initialState, action) => {
     case "COUNTERSUM":
       return { counterSum: state.counterSum + action.payload };
     case "GENERATE_COUNTERS":
-      return {counterItems: new Array(action.payload)
+      return {
+        counterSum: 0,
+        counterItems: new Array(action.payload)
         .fill(0)
         .map(() => ({ count: 0, id: generateID() }))};
+    case "INCREASE_NUM":
+      const counterItems = state.counterItems.map(counterItem => {
+       if (counterItem.id === action.payload.id) {
+         return { ...counterItem, count: counterItem.count + action.payload.changedNum };
+       } else {
+          return counterItem;
+       }
+    });
+      return {...state, counterItems};
     default:
       return state;
   }
